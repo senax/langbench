@@ -1,9 +1,22 @@
 #!/bin/sh
 
+set -o nounset
+set -o errexit
+
+#    20  yum install gcc
+#   41  yum install java-1.7.0-openjdk-devel
+#   44  yum install php
+#   46  yum search inline
+#   47  yum install perl-Inline
+
 PATH=$PATH:/usr/local/bin/:/usr/sfw/bin:/opt/puppet/bin
 echo "Running on: "
 uname -a
 ARCH=`arch`
+echo "Go"
+go build test_go.go
+time ./test_go
+
 gcc -O3 -march=native -lm -o test_pthread.${ARCH} -lpthread test_pthread.c
 #gcc -O3 -march=native -lm -o test_pthread -lpthread test_pthread.c 
 gcc -O3 -lm -march=native -o test_pthread.${ARCH} -lpthread test_pthread.c 
