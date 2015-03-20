@@ -30,4 +30,4 @@ echo;echo "ruby"
 time ./test.rb
 echo;echo "bash"
 time bash ./test.sh
-echo;echo "bzip2"
+echo;echo "done"
