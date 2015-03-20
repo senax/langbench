@@ -5,7 +5,7 @@ do
 	x=$((3*$i))
 	z=`echo "sqrt($x)" |bc -l`
 	x=$(($x/$i))
-#	time=`date`
+	time=`date`
 done
 echo $time
 echo "z=$z"

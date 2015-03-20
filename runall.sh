@@ -3,42 +3,41 @@
 set -o nounset
 set -o errexit
 
-#    20  yum install gcc
-#   41  yum install java-1.7.0-openjdk-devel
-#   44  yum install php
-#   46  yum search inline
-#   47  yum install perl-Inline
+# yum install gcc golang java-1.7.0-openjdk-devel php install perl-Inline
 
 PATH=$PATH:/usr/local/bin/:/usr/sfw/bin:/opt/puppet/bin
 echo "Running on: "
 uname -a
 ARCH=`arch`
+[ -d "_Inline" ] && rm -rf "_Inline"
+echo;echo "test_fastperl run 1"
+time ./test_fastperl.pl
+echo;echo "test_fastperl run 2"
+time ./test_fastperl.pl
+echo;echo "python run 1"
+time ./test.py
+echo;echo "python run 2"
+time ./test.py
+
 echo "Go"
 go build test_go.go
 time ./test_go
 
 gcc -O3 -march=native -lm -o test_pthread.${ARCH} -lpthread test_pthread.c
-#gcc -O3 -march=native -lm -o test_pthread -lpthread test_pthread.c 
 gcc -O3 -lm -march=native -o test_pthread.${ARCH} -lpthread test_pthread.c 
-for i in 1 2 4 8 16 32 64 128 256 512 1000; do echo "Running $i threads"; time ./test_pthread.${ARCH} $i > /dev/null ;done
-#time ./test_pthread.${ARCH} 4
+for i in 1 2 4 8 16 32 64 128 256 512 1000; do echo "C $i threads"; time ./test_pthread.${ARCH} $i > /dev/null ;done
 echo "C -O3 -march native"
 gcc -O3 -march=native -o test.${ARCH} -lm test.c
 time ./test.${ARCH}
 echo "C -O0"
 gcc -O0 -o test.${ARCH} -lm test.c
-#gcc -O3 -o test -lm test.c
 time ./test.${ARCH}
 echo;echo "Java"
 javac Test.java ; time java Test
-echo;echo "test_fastperl"
-time ./test_fastperl.pl
 echo;echo "perl"
 time ./test.pl
 echo;echo "php"
 time ./test.php
-echo;echo "python"
-time ./test.py
 echo;echo "ruby"
 time ./test.rb
 echo;echo "bash"
