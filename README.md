@@ -4,7 +4,8 @@ simple benchmark of a few languages
 Running on:
 Linux c7a.thuis.moona.net 3.10.0-123.el7.x86_64 #1 SMP Mon Jun 30 12:09:22 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
 
-
+Lang | elapsed time | user | system | result
+---- | ------------ | ---- | ------ | -----
 Go| real    0m5.585s| user    0m5.586s| sys     0m0.006s | z=17320.507989086233
 C Running 1 threads| real    0m0.884s| user    0m0.883s| sys     0m0.001s|
 C Running 2 threads| real    0m0.423s| user    0m0.843s| sys     0m0.001s|
